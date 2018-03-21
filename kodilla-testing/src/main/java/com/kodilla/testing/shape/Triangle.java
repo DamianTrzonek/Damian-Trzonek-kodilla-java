@@ -1,5 +1,7 @@
 package com.kodilla.testing.shape;
 
+import java.util.Objects;
+
 public class Triangle implements Shape {
     private String name;
     private double sideA;
@@ -27,5 +29,22 @@ public class Triangle implements Shape {
         return "Triangle{" +
                 "name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Triangle triangle = (Triangle) o;
+        return Double.compare(triangle.sideA, sideA) == 0 &&
+                Double.compare(triangle.sideB, sideB) == 0 &&
+                Double.compare(triangle.sideC, sideC) == 0 &&
+                Objects.equals(name, triangle.name);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(name, sideA, sideB, sideC);
     }
 }

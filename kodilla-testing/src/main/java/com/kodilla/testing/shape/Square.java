@@ -1,5 +1,7 @@
 package com.kodilla.testing.shape;
 
+import java.util.Objects;
+
 public class Square implements Shape {
     private String name;
     private double sideA;
@@ -20,5 +22,20 @@ public class Square implements Shape {
         return "Square{" +
                 "name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Square square = (Square) o;
+        return Double.compare(square.sideA, sideA) == 0 &&
+                Objects.equals(name, square.name);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(name, sideA);
     }
 }
