@@ -72,6 +72,7 @@ public class ShapeCollectorTestSuite {
         ShapeCollector collector = new ShapeCollector();
         Circle circle = new Circle("circle1",2.0);
         Square square = new Square("square1",2.5);
+        Square square1 = new Square("square1", 2.5);
         Triangle triangle = new Triangle("triangle1",2.5,5.5,7.0 );
         collector.addFigure(circle);
         collector.addFigure(square);
@@ -80,5 +81,6 @@ public class ShapeCollectorTestSuite {
         ArrayList<Shape> expected = new ArrayList<>(Arrays.asList(circle,square,triangle));
         //Then
         Assert.assertEquals(expected.toString(), collector.showFigures());
+        Assert.assertEquals(square,square1);
     }
 }

@@ -5,8 +5,9 @@ import java.util.List;
 public class ForumCalculator {
     Statistics statistics;
     List<String> usersNames;
-    int numberOfPosts;
-    int numberOfComments;
+    double numberOfUsers;
+    double numberOfPosts;
+    double numberOfComments;
     double avgPostsOnUser;
     double avgCommentsOnUser;
     double avgCommentsOnPost;
@@ -18,8 +19,9 @@ public class ForumCalculator {
     public void calculateAdvStatistics(Statistics statistics) {
         ForumCalculator forumCalculator = new ForumCalculator(statistics);
         usersNames = forumCalculator.statistics.usersNames();
-        numberOfPosts = forumCalculator.statistics.postCount();
-        numberOfComments = forumCalculator.statistics.commentsCount();
+        numberOfUsers = (double) usersNames.size();
+        numberOfPosts = (double) forumCalculator.statistics.postCount();
+        numberOfComments =(double) forumCalculator.statistics.commentsCount();
 
         if (numberOfPosts == 0) {
             avgCommentsOnPost = 0.0;
@@ -47,15 +49,15 @@ public class ForumCalculator {
         System.out.println("Average number of comments on post: " + getAvgCommentsOnPost());
     }
 
-    public int getNumberOfUsers() {
+    public double getNumberOfUsers() {
         return usersNames.size();
     }
 
-    public int getNumberOfPosts() {
+    public double getNumberOfPosts() {
         return numberOfPosts;
     }
 
-    public int getNumberOfComments() {
+    public double getNumberOfComments() {
         return numberOfComments;
     }
 

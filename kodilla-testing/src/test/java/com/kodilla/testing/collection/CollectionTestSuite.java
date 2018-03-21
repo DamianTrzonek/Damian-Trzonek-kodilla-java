@@ -29,6 +29,7 @@ public class CollectionTestSuite {
         System.out.println("Testing empty ArrayList<Integer>");
     //Then
         Assert.assertEquals(resultEmptyList,emptyNumberList);
+        Assert.assertTrue(emptyNumberList.isEmpty());
     }
     @Test
     public void testOddNumbersExterminatorNormalList() {

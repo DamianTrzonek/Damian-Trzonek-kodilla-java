@@ -46,17 +46,17 @@ public class ForumCalculatorTestSuite {
         ForumCalculator forumCalculator = new ForumCalculator(statisticsMock);
         //When
         forumCalculator.calculateAdvStatistics(statisticsMock);
-        double result1 = forumCalculator.getAvgPostsOnUser();
-        double result2 = forumCalculator.getAvgCommentsOnUser();
-        double result3 = forumCalculator.getAvgCommentsOnPost();
+        double avgPostsOnUser = forumCalculator.getAvgPostsOnUser();
+        double avgCommentsOnUser = forumCalculator.getAvgCommentsOnUser();
+        double avgCommentsOnPost = forumCalculator.getAvgCommentsOnPost();
         //Then
-        double expectedAvgPostsOnUser = postCount / usersNames.size();
-        double expectedAvgCommentsOnUser = commentsCount / usersNames.size();
+        double expectedAvgPostsOnUser = 0.0;
+        double expectedAvgCommentsOnUser = 100.0;
         double expectedAvgCommentsOnPost = 0.0;
         System.out.println("Testing ForumCalculator with zero posts");
-        Assert.assertTrue(result1 == expectedAvgPostsOnUser);
-        Assert.assertTrue(result2 == expectedAvgCommentsOnUser);
-        Assert.assertTrue(result3 == expectedAvgCommentsOnPost);
+        Assert.assertEquals(expectedAvgPostsOnUser,avgPostsOnUser,0.0);
+        Assert.assertEquals(expectedAvgCommentsOnUser, avgCommentsOnUser,0.0);
+        Assert.assertEquals(expectedAvgCommentsOnPost,avgCommentsOnPost, 0.0);
 
 
     }
@@ -76,18 +76,17 @@ public class ForumCalculatorTestSuite {
         ForumCalculator forumCalculator = new ForumCalculator(statisticsMock);
         //When
         forumCalculator.calculateAdvStatistics(statisticsMock);
-        double result1 = forumCalculator.getAvgPostsOnUser();
-        double result2 = forumCalculator.getAvgCommentsOnUser();
-        double result3 = forumCalculator.getAvgCommentsOnPost();
-
+        double avgPostsOnUser = forumCalculator.getAvgPostsOnUser();
+        double avgCommentsOnUser = forumCalculator.getAvgCommentsOnUser();
+        double avgCommentsOnPost = forumCalculator.getAvgCommentsOnPost();
         //Then
-        double expectedAvgPostsOnUser = postCount / usersNames.size();
-        double expectedAvgCommentsOnUser =commentsCount / usersNames.size();
-        double expectedAvgCommentsOnPost = commentsCount / postCount;
+        double expectedAvgPostsOnUser = 100.0;
+        double expectedAvgCommentsOnUser = 0.1;
+        double expectedAvgCommentsOnPost = 0.001;
         System.out.println("Testing ForumCalculator with thousand posts");
-        Assert.assertTrue(result1 == expectedAvgPostsOnUser);
-        Assert.assertTrue(result2 == expectedAvgCommentsOnUser);
-        Assert.assertTrue(result3 == expectedAvgCommentsOnPost);
+        Assert.assertEquals(expectedAvgPostsOnUser,avgPostsOnUser,0.1);
+        Assert.assertEquals(expectedAvgCommentsOnUser, avgCommentsOnUser,0.01);
+        Assert.assertEquals(expectedAvgCommentsOnPost,avgCommentsOnPost, 0.0001);
     }
 
     @Test
@@ -105,18 +104,17 @@ public class ForumCalculatorTestSuite {
         ForumCalculator forumCalculator = new ForumCalculator(statisticsMock);
         //When
         forumCalculator.calculateAdvStatistics(statisticsMock);
-        double result1 = forumCalculator.getAvgPostsOnUser();
-        double result2 = forumCalculator.getAvgCommentsOnUser();
-        double result3 = forumCalculator.getAvgCommentsOnPost();
-
+        double avgPostsOnUser = forumCalculator.getAvgPostsOnUser();
+        double avgCommentsOnUser = forumCalculator.getAvgCommentsOnUser();
+        double avgCommentsOnPost = forumCalculator.getAvgCommentsOnPost();
         //Then
-        double expectedAvgPostsOnUser = postCount / usersNames.size();
-        double expectedAvgCommentsOnUser =commentsCount / usersNames.size();
-        double expectedAvgCommentsOnPost = commentsCount / postCount;
+        double expectedAvgPostsOnUser = 10.0;
+        double expectedAvgCommentsOnUser = 0.0;
+        double expectedAvgCommentsOnPost = 0.0;
         System.out.println("Testing ForumCalculator with zero comments");
-        Assert.assertTrue(result1 == expectedAvgPostsOnUser);
-        Assert.assertTrue(result2 == expectedAvgCommentsOnUser);
-        Assert.assertTrue(result3 == expectedAvgCommentsOnPost);
+        Assert.assertEquals(expectedAvgPostsOnUser,avgPostsOnUser,0.0);
+        Assert.assertEquals(expectedAvgCommentsOnUser, avgCommentsOnUser,0.0);
+        Assert.assertEquals(expectedAvgCommentsOnPost,avgCommentsOnPost, 0.0);
     }
 
     @Test
@@ -133,18 +131,18 @@ public class ForumCalculatorTestSuite {
         ForumCalculator forumCalculator = new ForumCalculator(statisticsMock);
         //When
         forumCalculator.calculateAdvStatistics(statisticsMock);
-        double result1 = forumCalculator.getAvgPostsOnUser();
-        double result2 = forumCalculator.getAvgCommentsOnUser();
-        double result3 = forumCalculator.getAvgCommentsOnPost();
+        double avgPostsOnUser = forumCalculator.getAvgPostsOnUser();
+        double avgCommentsOnUser = forumCalculator.getAvgCommentsOnUser();
+        double avgCommentsOnPost = forumCalculator.getAvgCommentsOnPost();
 
         //Then
-        double expectedAvgPostsOnUser = postCount / usersNames.size();
-        double expectedAvgCommentsOnUser =commentsCount / usersNames.size();
-        double expectedAvgCommentsOnPost = commentsCount / postCount;
+        double expectedAvgPostsOnUser = 50.0;
+        double expectedAvgCommentsOnUser = 12.5;
+        double expectedAvgCommentsOnPost = 0.25;
         System.out.println("Testing ForumCalculator with comments < posts");
-        Assert.assertTrue(result1 == expectedAvgPostsOnUser);
-        Assert.assertTrue(result2 == expectedAvgCommentsOnUser);
-        Assert.assertTrue(result3 == expectedAvgCommentsOnPost);
+        Assert.assertEquals(expectedAvgPostsOnUser,avgPostsOnUser,0.0);
+        Assert.assertEquals(expectedAvgCommentsOnUser, avgCommentsOnUser,0.0);
+        Assert.assertEquals(expectedAvgCommentsOnPost,avgCommentsOnPost, 0.00);
 
     }
 
@@ -153,8 +151,8 @@ public class ForumCalculatorTestSuite {
 
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-        int postCount = 100;
-        int commentsCount = 1550;
+        int postCount = 112;
+        int commentsCount = 1526;
         List<String> usersNames = new ArrayList<>(Arrays.asList("a", "b", "c", "d", "e", "f","g","h","i","j"));
 
         when(statisticsMock.postCount()).thenReturn(postCount);
@@ -163,18 +161,18 @@ public class ForumCalculatorTestSuite {
         ForumCalculator forumCalculator = new ForumCalculator(statisticsMock);
         //When
         forumCalculator.calculateAdvStatistics(statisticsMock);
-        double result1 = forumCalculator.getAvgPostsOnUser();
-        double result2 = forumCalculator.getAvgCommentsOnUser();
-        double result3 = forumCalculator.getAvgCommentsOnPost();
+        double avgPostsOnUser = forumCalculator.getAvgPostsOnUser();
+        double avgCommentsOnUser = forumCalculator.getAvgCommentsOnUser();
+        double avgCommentsOnPost = forumCalculator.getAvgCommentsOnPost();
 
         //Then
-        double expectedAvgPostsOnUser = postCount / usersNames.size();
-        double expectedAvgCommentsOnUser =commentsCount / usersNames.size();
-        double expectedAvgCommentsOnPost = commentsCount / postCount;
+        double expectedAvgPostsOnUser = 11.2;
+        double expectedAvgCommentsOnUser = 152.6;
+        double expectedAvgCommentsOnPost = 13.625;
         System.out.println("Testing ForumCalculator with comments > posts");
-        Assert.assertTrue(result1 == expectedAvgPostsOnUser);
-        Assert.assertTrue(result2 == expectedAvgCommentsOnUser);
-        Assert.assertTrue(result3 == expectedAvgCommentsOnPost);
+        Assert.assertEquals(expectedAvgPostsOnUser,avgPostsOnUser,0.0);
+        Assert.assertEquals(expectedAvgCommentsOnUser, avgCommentsOnUser,0.0);
+        Assert.assertEquals(expectedAvgCommentsOnPost,avgCommentsOnPost, 0.0);
     }
 
     @Test
@@ -182,7 +180,7 @@ public class ForumCalculatorTestSuite {
 
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-        int postCount = 500;
+        int postCount = 550;
         int commentsCount = 1255;
         List<String> usersNames = new ArrayList<>(Arrays.asList("a", "b", "c", "d", "e", "f","g","h","i","j"));
         usersNames.clear();
@@ -193,18 +191,18 @@ public class ForumCalculatorTestSuite {
         ForumCalculator forumCalculator = new ForumCalculator(statisticsMock);
         //When
         forumCalculator.calculateAdvStatistics(statisticsMock);
-        double result1 = forumCalculator.getAvgPostsOnUser();
-        double result2 = forumCalculator.getAvgCommentsOnUser();
-        double result3 = forumCalculator.getAvgCommentsOnPost();
+        double avgPostsOnUser = forumCalculator.getAvgPostsOnUser();
+        double avgCommentsOnUser = forumCalculator.getAvgCommentsOnUser();
+        double avgCommentsOnPost = forumCalculator.getAvgCommentsOnPost();
 
         //Then
         double expectedAvgPostsOnUser = 0.0;
         double expectedAvgCommentsOnUser = 0.0;
-        double expectedAvgCommentsOnPost = commentsCount / postCount;
+        double expectedAvgCommentsOnPost = 2.281;
         System.out.println("Testing ForumCalculator with zero users");
-        Assert.assertTrue(result1 == expectedAvgPostsOnUser);
-        Assert.assertTrue(result2 == expectedAvgCommentsOnUser);
-        Assert.assertTrue(result3 == expectedAvgCommentsOnPost);
+        Assert.assertEquals(expectedAvgPostsOnUser,avgPostsOnUser,0.0);
+        Assert.assertEquals(expectedAvgCommentsOnUser, avgCommentsOnUser,0.0);
+        Assert.assertEquals(expectedAvgCommentsOnPost,avgCommentsOnPost, 0.001);
     }
 
     @Test
@@ -226,17 +224,17 @@ public class ForumCalculatorTestSuite {
         ForumCalculator forumCalculator = new ForumCalculator(statisticsMock);
         //When
         forumCalculator.calculateAdvStatistics(statisticsMock);
-        double result1 = forumCalculator.getAvgPostsOnUser();
-        double result2 = forumCalculator.getAvgCommentsOnUser();
-        double result3 = forumCalculator.getAvgCommentsOnPost();
+        double avgPostsOnUser = forumCalculator.getAvgPostsOnUser();
+        double avgCommentsOnUser = forumCalculator.getAvgCommentsOnUser();
+        double avgCommentsOnPost = forumCalculator.getAvgCommentsOnPost();
 
         //Then
-        double expectedAvgPostsOnUser = postCount / usersNames.size();
-        double expectedAvgCommentsOnUser =commentsCount / usersNames.size();
-        double expectedAvgCommentsOnPost = commentsCount / postCount;
+        double expectedAvgPostsOnUser = 5.555;
+        double expectedAvgCommentsOnUser = 7.25;
+        double expectedAvgCommentsOnPost = 1.305;
         System.out.println("Testing ForumCalculator with thousand users");
-        Assert.assertTrue(result1 == expectedAvgPostsOnUser);
-        Assert.assertTrue(result2 == expectedAvgCommentsOnUser);
-        Assert.assertTrue(result3 == expectedAvgCommentsOnPost);
+        Assert.assertEquals(expectedAvgPostsOnUser,avgPostsOnUser,0.0);
+        Assert.assertEquals(expectedAvgCommentsOnUser, avgCommentsOnUser,0.0);
+        Assert.assertEquals(expectedAvgCommentsOnPost,avgCommentsOnPost, 0.001);
     }
 }
