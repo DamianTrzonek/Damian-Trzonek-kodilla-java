@@ -21,13 +21,14 @@ public class CollectionTestSuite {
     @Test
     public void testOddNumbersExterminatorEmptyList() {
     //Given
-        ArrayList<Integer> numbers = new ArrayList<>();
         OddNumbersExterminator exterminator = new OddNumbersExterminator();
+        ArrayList<Integer> resultEmptyList = new ArrayList<>();
     //When
-        exterminator.exterminate(numbers);
-        System.out.println("Testing empty ArrayList<Integer> numbers");
+        ArrayList<Integer> emptyNumberList = new ArrayList<>();
+        exterminator.exterminate(emptyNumberList);
+        System.out.println("Testing empty ArrayList<Integer>");
     //Then
-        Assert.assertTrue(numbers.isEmpty());
+        Assert.assertEquals(resultEmptyList,emptyNumberList);
     }
     @Test
     public void testOddNumbersExterminatorNormalList() {
