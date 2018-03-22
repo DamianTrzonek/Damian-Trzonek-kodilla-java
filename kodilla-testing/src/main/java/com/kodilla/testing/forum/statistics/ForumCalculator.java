@@ -4,13 +4,13 @@ import java.util.List;
 
 public class ForumCalculator {
     Statistics statistics;
-    List<String> usersNames;
-    double numberOfUsers;
-    double numberOfPosts;
-    double numberOfComments;
-    double avgPostsOnUser;
-    double avgCommentsOnUser;
-    double avgCommentsOnPost;
+   private List<String> usersNames;
+   private double numberOfUsers;
+   private double numberOfPosts;
+   private double numberOfComments;
+   private double avgPostsOnUser;
+   private double avgCommentsOnUser;
+   private double avgCommentsOnPost;
 
     public ForumCalculator(Statistics statistics) {
         this.statistics = statistics;
