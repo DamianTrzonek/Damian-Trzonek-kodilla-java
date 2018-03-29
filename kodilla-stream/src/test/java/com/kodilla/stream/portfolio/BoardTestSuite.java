@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalDouble;
 import java.util.stream.LongStream;
 
 import static java.util.stream.Collectors.toList;
@@ -160,7 +161,15 @@ public class BoardTestSuite {
 
         double avgDaysOnTask = sumDaysOfTasksInProgress / totalNumberOfTasks;
 
+       double avgTestUsingAverage = project.getTaskLists().stream()
+                .filter(inProgressTasks::contains)
+                .flatMap(t1 -> t1.getTasks().stream())
+                .map(t-> t.getCreated().until(LocalDate.now(),ChronoUnit.DAYS)).mapToDouble(n->n).average().getAsDouble();
+        System.out.println(avgTestUsingAverage);
+
         //Then
+        Assert.assertEquals(10,avgTestUsingAverage,0);
+        Assert.assertEquals(avgDaysOnTask,avgTestUsingAverage,0);
         Assert.assertEquals(10,avgDaysOnTask,0);
 
 
