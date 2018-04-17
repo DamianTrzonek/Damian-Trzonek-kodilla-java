@@ -4,8 +4,8 @@ public class Application {
     public static void main(String[]args) {
 
         FlightFinder flightFinder = new FlightFinder();
-        flightFinder.searchFlightFrom("Warszawa");
+        flightFinder.searchFlightFrom("Krakow");
         flightFinder.searchFLightTo("Gdansk");
-        flightFinder.searchIndirectFlightTo("Krakow","Gdansk","Warszawa");
+        flightFinder.searchIndirectFlightTo("Krakow","Gdansk");
     }
 }

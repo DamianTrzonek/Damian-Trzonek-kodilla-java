@@ -3,6 +3,7 @@ package com.kodilla.flightfinder.challenge;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FlightFinder {
 
@@ -21,13 +22,24 @@ public class FlightFinder {
 
     }
 
-    public void searchIndirectFlightTo(String from,String to, String through) {
+    public void searchIndirectFlightTo(String from,String to) {
         System.out.println("Possible options of flights:");
-        List<Flight> indirectFrom = FlightsTable.getFlights().stream()
-                .filter(flight -> flight.getDepartureFrom().equals(from) && flight.getArrivalAt().equals(through))
+        List<Flight> fromDestination = FlightsTable.getFlights().stream()
+                .filter(flight -> flight.getDepartureFrom().equals(from))
                 .collect(Collectors.toList());
 
-        List<Flight> indirectToDestination = FlightsTable.getFlights().stream()
+        List<Flight> toDestination = FlightsTable.getFlights().stream()
+                .filter(flight -> flight.getArrivalAt().equals(to))
+                .collect(Collectors.toList());
+
+        List<List> temporaryFlightList = new ArrayList<>();
+        temporaryFlightList.add(fromDestination);
+        temporaryFlightList.add(toDestination);
+
+              Stream searchResult = temporaryFlightList.stream();
+              searchResult
+
+        /*List<Flight> indirectToDestination = FlightsTable.getFlights().stream()
                 .filter(flight -> flight.getDepartureFrom().equals(through) && flight.getArrivalAt().equals(to))
                 .collect(Collectors.toList());
         List<List<Flight>> searchResult = new ArrayList<>();
@@ -35,6 +47,6 @@ public class FlightFinder {
         searchResult.add(indirectToDestination);
         searchResult.stream()
                 .flatMap(List::stream)
-                .forEach(System.out::println);
+                .forEach(System.out::println); */
     }
 }
