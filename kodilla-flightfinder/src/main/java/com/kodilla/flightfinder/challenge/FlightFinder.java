@@ -22,22 +22,35 @@ public class FlightFinder {
 
     }
 
-    public void searchIndirectFlightTo(String from,String to) {
-        System.out.println("Possible options of flights:");
-        List<Flight> fromDestination = FlightsTable.getFlights().stream()
-                .filter(flight -> flight.getDepartureFrom().equals(from))
-                .collect(Collectors.toList());
+    private List<Flight> searchDirectFlight(String from, String to) {
 
-        List<Flight> toDestination = FlightsTable.getFlights().stream()
+          return FlightsTable.getFlights().stream()
+                .filter(flight -> flight.getDepartureFrom().equals(from))
+                .filter(flight -> flight.getArrivalAt().equals(to))
+                .collect(Collectors.toList());
+    }
+
+    public void searchIndirectFlightTo(String from, String to) {
+        System.out.println("Possible options of flights:");
+
+        List<Flight> temporaryFlightListTo = FlightsTable.getFlights().stream()
                 .filter(flight -> flight.getArrivalAt().equals(to))
                 .collect(Collectors.toList());
 
-        List<List> temporaryFlightList = new ArrayList<>();
-        temporaryFlightList.add(fromDestination);
-        temporaryFlightList.add(toDestination);
+        List<Flight> temporaryFlightListFrom = FlightsTable.getFlights().stream()
+                .filter(flight2 -> flight2.getDepartureFrom().equals(from))
+                        .collect(Collectors.toList());
 
-              Stream searchResult = temporaryFlightList.stream();
-              searchResult
+        List<Flight> resultList = temporaryFlightListFrom.stream()
+                .filter(flight -> flight.getArrivalAt().equals(temporaryFlightListT))
+
+
+        //List<Flight> resultList = temporaryFlightList.stream()
+          //      .filter(flight -> )
+
+
+
+
 
         /*List<Flight> indirectToDestination = FlightsTable.getFlights().stream()
                 .filter(flight -> flight.getDepartureFrom().equals(through) && flight.getArrivalAt().equals(to))
