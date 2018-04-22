@@ -2,6 +2,7 @@ package com.kodilla.flightfinder.challenge;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -33,33 +34,33 @@ public class FlightFinder {
     public void searchIndirectFlightTo(String from, String to) {
         System.out.println("Possible options of flights:");
 
-        List<Flight> temporaryFlightListTo = FlightsTable.getFlights().stream()
+        List<Flight> flightsTo = FlightsTable.getFlights().stream()
                 .filter(flight -> flight.getArrivalAt().equals(to))
                 .collect(Collectors.toList());
 
-        List<Flight> temporaryFlightListFrom = FlightsTable.getFlights().stream()
-                .filter(flight2 -> flight2.getDepartureFrom().equals(from))
-                        .collect(Collectors.toList());
-
-        List<Flight> resultList = temporaryFlightListFrom.stream()
-                .filter(flight -> flight.getArrivalAt().equals(temporaryFlightListT))
-
-
-        //List<Flight> resultList = temporaryFlightList.stream()
-          //      .filter(flight -> )
-
-
-
-
-
-        /*List<Flight> indirectToDestination = FlightsTable.getFlights().stream()
-                .filter(flight -> flight.getDepartureFrom().equals(through) && flight.getArrivalAt().equals(to))
+        List<Flight> flightsFrom = FlightsTable.getFlights().stream()
+                .filter(flight -> flight.getDepartureFrom().equals(from))
                 .collect(Collectors.toList());
-        List<List<Flight>> searchResult = new ArrayList<>();
-        searchResult.add(indirectFrom);
-        searchResult.add(indirectToDestination);
-        searchResult.stream()
-                .flatMap(List::stream)
-                .forEach(System.out::println); */
+
+        List<Flight> resultList = new ArrayList<>();
+
+        for(Flight f1 : flightsFrom) {
+            for(Flight f2 : flightsTo) {
+                if(f1.getArrivalAt().equals(f2.getDepartureFrom())) {
+                    resultList.add(f1);
+                }
+            }
+        }
+
+        for(Flight f1 : flightsTo) {
+            for(Flight f2 : flightsFrom) {
+                if(f1.getDepartureFrom().equals(f2.getArrivalAt())) {
+                    resultList.add(f1);
+                }
+            }
+        }
+
+        System.out.println(resultList);
+
     }
 }

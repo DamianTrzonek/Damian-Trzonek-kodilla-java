@@ -15,8 +15,9 @@ public final class FlightsTable {
         flights.add(new Flight("Krakow","Poznan"));
         flights.add(new Flight("Warszawa","Poznan"));
         flights.add(new Flight("Katowice","Warszawa"));
-        flights.add(new Flight("Wroclaw","Warszawa"));
+        flights.add(new Flight("Krakow","Gdansk"));
         flights.add(new Flight("Krakow","Warszawa"));
         return new ArrayList<>(flights);
     }
+
 }
