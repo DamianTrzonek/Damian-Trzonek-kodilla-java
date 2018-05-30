@@ -1,34 +1,56 @@
 package com.kodilla.rps;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
 public class Player {
-    public static final String PLAYER = "PLAYER";
-    public static final String ROCK = "ROCK";
-    public static final String PAPER = "PAPER";
-    public static final String SCISSORS = "SCISSORS";
-    private int wins = 0;
+   private String name;
+   private int wins = 0;
+   private Type playerMove;
 
-    public final String  play() {
-        String play = null;
-        if (number == 1) {
-            play = ROCK;
-        } else if (number == 2) {
-             play = PAPER;
-        } else if (number == 3) {
-             play = SCISSORS;
-        } else {
-            System.out.println("You have to choose from numbers 1 to 3!");
-        }
-        return play;
+   public void playerMove() {
+       Scanner scanner = new Scanner(System.in);
+       String rpsChoice = scanner.nextLine();
+       switch (rpsChoice) {
+           case "1":
+               System.out.println(getName() + " played ROCK");
+               playerMove = new Rock();
+               break;
+           case "2":
+               System.out.println(getName() + " played PAPER");
+               playerMove = new Paper();
+               break;
+           case "3":
+               System.out.println(getName() + " played SCISSORS");
+               playerMove = new Scissors();
+               break;
+               default:
+                   System.out.println("Not valid option! Choose from 1 to 3.");
+       }
+   }
+
+    public Type getPlayerMove() {
+        return playerMove;
     }
 
     public int getWins() {
         return wins;
     }
 
-    public void setWins(int wins) {
-        this.wins = wins;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void playerWinsRound() {
+       this.wins += 1;
+    }
+
+    public void resetWins() {
+        this.wins = 0;
     }
 }
+
