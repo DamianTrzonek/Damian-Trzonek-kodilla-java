@@ -1,7 +1,9 @@
 package com.kodilla.hibernate.manytomany.dao;
 
 import com.kodilla.hibernate.manytomany.Company;
+import com.kodilla.hibernate.manytomany.CompanyDao;
 import com.kodilla.hibernate.manytomany.Employee;
+import com.kodilla.hibernate.manytomany.EmployeeDao;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -109,7 +111,7 @@ public class CompanyDaoTestSuite {
         employeeDao.save(camillaKovalsky);
         int camillaKovalskyId = camillaKovalsky.getId();
         employeeDao.save(joshuaSmith);
-        int joshuaSmithId = johnSmith.getId();
+        int joshuaSmithId = joshuaSmith.getId();
 
 
         //When

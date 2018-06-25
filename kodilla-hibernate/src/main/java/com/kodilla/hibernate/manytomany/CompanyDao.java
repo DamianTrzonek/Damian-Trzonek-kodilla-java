@@ -1,4 +1,4 @@
-package com.kodilla.hibernate.manytomany.dao;
+package com.kodilla.hibernate.manytomany;
 
 import com.kodilla.hibernate.manytomany.Company;
 import org.springframework.data.jpa.repository.Query;
