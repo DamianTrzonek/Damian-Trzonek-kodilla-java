@@ -4,9 +4,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-@NamedQuery(
-        name = "Company.retreiveCompaniesWhereName",
-query = "FROM Company WHERE name LIKE :%NAME%")
 
 @NamedNativeQuery(
         name = "Company.retrieveCompaniesWhereName",
