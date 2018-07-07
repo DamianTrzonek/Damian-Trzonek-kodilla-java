@@ -1,17 +1,17 @@
 package com.kodilla.hibernate.manytomany.dao;
 
 import com.kodilla.hibernate.manytomany.Company;
-import com.kodilla.hibernate.manytomany.CompanyDao;
 import com.kodilla.hibernate.manytomany.Employee;
-import com.kodilla.hibernate.manytomany.EmployeeDao;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -22,11 +22,13 @@ public class CompanyDaoTestSuite {
     EmployeeDao employeeDao;
 
     @Test
+    @Transactional
     public void testSaveManyToMany() {
         //Initial Cleanup
         companyDao.deleteAll();
+        employeeDao.deleteAll();
         //Given
-        Employee johnSmith = new Employee("John","Smith");
+        Employee johnSmith = new Employee("John", "Smith");
         Employee stephanieClarckson = new Employee("Stephanie", "Clarckson");
         Employee lindaKovalsky = new Employee("Linda", "Kovalsky");
 
@@ -64,26 +66,29 @@ public class CompanyDaoTestSuite {
             companyDao.delete(softwareMachineId);
             companyDao.delete(dataMastersId);
             companyDao.delete(greyMatterId);
+            companyDao.deleteAll();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+
     @Test
+    @Transactional
     public void testNamedQueries() {
-        //Given
+        //Initial Cleanup
         companyDao.deleteAll();
         employeeDao.deleteAll();
-
-        Employee johnSmith = new Employee("John","Smith");
+        //Given
+        Employee johnSmith = new Employee("John", "Smith");
         Employee stephanieClarckson = new Employee("Stephanie", "Clarckson");
         Employee lindaKovalsky = new Employee("Linda", "Kovalsky");
         Employee andySmith = new Employee("Andy", "Smith");
-        Employee camillaKovalsky = new Employee("Camilla","Kovalsky");
+        Employee camillaKovalsky = new Employee("Camilla", "Kovalsky");
         Employee joshuaSmith = new Employee("Joshua", "Smith");
 
         Company softwareMachine = new Company("Software Machine");
-        Company dataMasters = new Company("Data Masters");
+        Company dataMatters = new Company("Data Matters");
         Company greyMatter = new Company("Grey Matter");
         Company greenLight = new Company("Green Light");
         Company datCode = new Company("Dat Code");
@@ -91,8 +96,8 @@ public class CompanyDaoTestSuite {
 
         companyDao.save(softwareMachine);
         int softwareMachineId = softwareMachine.getId();
-        companyDao.save(dataMasters);
-        int dataMastersId = dataMasters.getId();
+        companyDao.save(dataMatters);
+        int dataMattersId = dataMatters.getId();
         companyDao.save(greyMatter);
         int greyMatterId = greyMatter.getId();
         companyDao.save(greenLight);
@@ -117,42 +122,43 @@ public class CompanyDaoTestSuite {
 
 
         //When
-       List<Company> companiesStaringWithLettersDat = companyDao.retrieveCompaniesWhereName("Dat");
-       List<Company> companiesStartingWithLettersSof = companyDao.retrieveCompaniesWhereName("Sof");
-       List<Company> companiesStartingWithLettersGre = companyDao.retrieveCompaniesWhereName("Gre");
-       List<Company> companiesStartingWithLettersCod = companyDao.retrieveCompaniesWhereName("Cod");
-       List<Employee> listOfSmith =  employeeDao.retrieveEmployeesWithLastname("Smith");
-       List<Employee> listOfKovalsky = employeeDao.retrieveEmployeesWithLastname("Kovalsky");
-       List<Employee> listofClarckson = employeeDao.retrieveEmployeesWithLastname("Clarckson");
+        List<Company> companiesStaringWithLettersDat = companyDao.retrieveCompaniesWhereName("Dat");
+        List<Company> companiesStartingWithLettersSof = companyDao.retrieveCompaniesWhereName("Sof");
+        List<Company> companiesStartingWithLettersGre = companyDao.retrieveCompaniesWhereName("Gre");
+        List<Company> companiesStartingWithLettersCod = companyDao.retrieveCompaniesWhereName("Cod");
+        List<Employee> listOfSmith = employeeDao.retrieveEmployeesWithLastname("Smith");
+        List<Employee> listOfKovalsky = employeeDao.retrieveEmployeesWithLastname("Kovalsky");
+        List<Employee> listofClarckson = employeeDao.retrieveEmployeesWithLastname("Clarckson");
 
         //Then
-       try{
-           Assert.assertEquals(2, companiesStaringWithLettersDat.size());
-        Assert.assertEquals(1, companiesStartingWithLettersSof.size());
-        Assert.assertEquals(2, companiesStartingWithLettersGre.size());
-        Assert.assertEquals(1, companiesStartingWithLettersCod.size());
-        Assert.assertEquals(3, listOfSmith.size());
-        Assert.assertEquals(2, listOfKovalsky.size());
-        Assert.assertEquals(1, listofClarckson.size());
-    } catch (Exception e) {
-           e.printStackTrace();
-       }
-       //CleanUp
         try {
-           companyDao.delete(softwareMachineId);
-           companyDao.delete(dataMastersId);
-           companyDao.delete(greyMatterId);
-           companyDao.delete(greenLightId);
-           companyDao.delete(datCodeId);
-           companyDao.delete(codeVadersId);
-           employeeDao.delete(johnSmithId);
-           employeeDao.delete(stephanieClarcksonId);
-           employeeDao.delete(lindaKovalskyId);
-           employeeDao.delete(andySmithId);
-           employeeDao.delete(camillaKovalskyId);
-           employeeDao.delete(joshuaSmithId);
+            Assert.assertEquals(2, companiesStaringWithLettersDat.size());
+            Assert.assertEquals(1, companiesStartingWithLettersSof.size());
+            Assert.assertEquals(2, companiesStartingWithLettersGre.size());
+            Assert.assertEquals(1, companiesStartingWithLettersCod.size());
+            Assert.assertEquals(3, listOfSmith.size());
+            Assert.assertEquals(2, listOfKovalsky.size());
+            Assert.assertEquals(1, listofClarckson.size());
         } catch (Exception e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
-       }
+
+//CleanUp
+        try {
+            companyDao.delete(softwareMachineId);
+            companyDao.delete(dataMattersId);
+            companyDao.delete(greyMatterId);
+            companyDao.delete(greenLightId);
+            companyDao.delete(datCodeId);
+            companyDao.delete(codeVadersId);
+            employeeDao.delete(johnSmithId);
+            employeeDao.delete(stephanieClarcksonId);
+            employeeDao.delete(lindaKovalskyId);
+            employeeDao.delete(andySmithId);
+            employeeDao.delete(camillaKovalskyId);
+            employeeDao.delete(joshuaSmithId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

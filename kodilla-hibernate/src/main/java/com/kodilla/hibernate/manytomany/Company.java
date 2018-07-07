@@ -12,6 +12,12 @@ import java.util.List;
         resultClass = Company.class
 )
 
+
+@NamedQuery(
+        name = "Company.retrieveCompaniesWhereNameLikeCod",
+        query = "FROM Company c WHERE c.name LIKE '%Cod%'" )
+
+
 @Entity
 @Table(name = "COMPANIES")
 public class Company {
@@ -39,7 +45,7 @@ public class Company {
         return name;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "companies")
+    @ManyToMany(cascade = CascadeType.MERGE, mappedBy = "companies")
     public List<Employee> getEmployees() {
         return employees;
     }
@@ -54,5 +60,14 @@ public class Company {
 
     private void setEmployees(List<Employee> employees) {
         this.employees = employees;
+    }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", employees=" + employees +
+                '}';
     }
 }
